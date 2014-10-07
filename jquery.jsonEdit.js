@@ -116,7 +116,9 @@
                         if( $btn.length >0 ){
                             $btn.bind('click',function(e){
                                 e.preventDefault();
-                                that.doFormat();
+                                that.doFormat({
+                                    submit:true
+                                });
                             });
                         }
                     }
@@ -173,7 +175,7 @@
                 }
 
                 //执行格式化
-                ,doFormat:function(){
+                ,doFormat:function(cfg){
                     var result = this.jsonFormat();
                     if( result ){
                         if( this.params.debug === true ){
@@ -183,6 +185,10 @@
 
                         if( this.params.onSuccess ){
                             this.params.onSuccess();
+                        }
+
+                        if( cfg && cfg.submit && this.params.onSubmit){
+                            this.params.onSubmit();
                         }
                     }
                 }
